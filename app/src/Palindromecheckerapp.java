@@ -1,24 +1,31 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
+
 public class Palindromecheckerapp {
-    static void main(String[] args) {
 
-        String input = "level";
+    public static void main(String[] args) {
 
+        String input = "civic";
+
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
         }
 
-        String reversed = "";
-        while (!stack.isEmpty()) {
-            reversed = reversed + stack.pop();
-        }
+        boolean isPalindrome = true;
 
-        boolean isPalindrome = input.equals(reversed);
+        while (!queue.isEmpty()) {
+            if (queue.poll() != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
 
         System.out.println("Input : " + input);
-        System.out.println("Reversed : " + reversed);
         System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
